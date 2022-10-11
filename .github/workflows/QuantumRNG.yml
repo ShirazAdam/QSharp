@@ -41,6 +41,14 @@ jobs:
           dotnet restore
           dotnet build --configuration Release --output ./output
           popd
+          
+        # Test the Quantum Component
+      - name: 'Unit Test the Quantum Component'
+        shell: pwsh
+        run: |
+          pushd '${{ env.AZURE_QUANTUM_UNIT_TEST_PACKAGE_PATH }}'
+          dotnet test --verbosity normal
+          popd
 
         # Estimate Quantum Resources
       - name: 'Estimate Quantum Resources'
